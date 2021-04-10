@@ -1,0 +1,57 @@
+
+application {
+  config {
+    baseName MyCommerce,
+    applicationType monolith,
+    authenticationType jwt
+    packageName com.mmtechy.commerce,
+    prodDatabaseType mysql,
+    buildTool gradle
+    clientFramework angular
+  }
+  entities *
+}
+
+entity Caisse {
+	argentRetraite Double,
+    argentDepose Double,
+    caisseAttendu Double
+}
+
+entity Client {
+	nom String,
+    prenom String,
+    mail String, 
+    telephone String,
+    localisation String
+}
+
+entity Produit {
+	libelle String,
+    categorie String,
+    prixVente Double,
+    prixAchat Double,
+    TVA Double
+}
+
+entity Stock {
+	dateEntree LocalDate,
+    fournisseur String, 
+    libelle String, 
+    quantite Integer,
+    montantAchatTTC Double, 
+    datePaiement LocalDate
+}
+
+entity Vente {
+	dateVente LocalDate,
+    nomRevendeur String,
+    modePaiement String,
+    montantVente Double,
+}
+relationship OneToMany {
+  Client to Vente 
+}
+relationship ManyToOne {
+  Produit to Vente 
+}
