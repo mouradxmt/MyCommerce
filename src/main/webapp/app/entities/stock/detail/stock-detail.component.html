@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="stock">
+      <h2 data-cy="stockDetailsHeading"><span jhiTranslate="myCommerceApp.stock.detail.title">Stock</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ stock.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="myCommerceApp.stock.dateEntree">Date Entree</span></dt>
+        <dd>
+          <span>{{ stock.dateEntree | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="myCommerceApp.stock.fournisseur">Fournisseur</span></dt>
+        <dd>
+          <span>{{ stock.fournisseur }}</span>
+        </dd>
+        <dt><span jhiTranslate="myCommerceApp.stock.libelle">Libelle</span></dt>
+        <dd>
+          <span>{{ stock.libelle }}</span>
+        </dd>
+        <dt><span jhiTranslate="myCommerceApp.stock.quantite">Quantite</span></dt>
+        <dd>
+          <span>{{ stock.quantite }}</span>
+        </dd>
+        <dt><span jhiTranslate="myCommerceApp.stock.montantAchatTTC">Montant Achat TTC</span></dt>
+        <dd>
+          <span>{{ stock.montantAchatTTC }}</span>
+        </dd>
+        <dt><span jhiTranslate="myCommerceApp.stock.datePaiement">Date Paiement</span></dt>
+        <dd>
+          <span>{{ stock.datePaiement | formatMediumDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/stock', stock.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

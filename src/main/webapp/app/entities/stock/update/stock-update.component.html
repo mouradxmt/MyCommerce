@@ -1,0 +1,112 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-stock-heading" data-cy="StockCreateUpdateHeading" jhiTranslate="myCommerceApp.stock.home.createOrEditLabel">
+        Create or edit a Stock
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="myCommerceApp.stock.dateEntree" for="field_dateEntree">Date Entree</label>
+          <div class="input-group">
+            <input
+              id="field_dateEntree"
+              data-cy="dateEntree"
+              type="text"
+              class="form-control"
+              name="dateEntree"
+              ngbDatepicker
+              #dateEntreeDp="ngbDatepicker"
+              formControlName="dateEntree"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateEntreeDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="myCommerceApp.stock.fournisseur" for="field_fournisseur">Fournisseur</label>
+          <input
+            type="text"
+            class="form-control"
+            name="fournisseur"
+            id="field_fournisseur"
+            data-cy="fournisseur"
+            formControlName="fournisseur"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="myCommerceApp.stock.libelle" for="field_libelle">Libelle</label>
+          <input type="text" class="form-control" name="libelle" id="field_libelle" data-cy="libelle" formControlName="libelle" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="myCommerceApp.stock.quantite" for="field_quantite">Quantite</label>
+          <input type="number" class="form-control" name="quantite" id="field_quantite" data-cy="quantite" formControlName="quantite" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="myCommerceApp.stock.montantAchatTTC" for="field_montantAchatTTC"
+            >Montant Achat TTC</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="montantAchatTTC"
+            id="field_montantAchatTTC"
+            data-cy="montantAchatTTC"
+            formControlName="montantAchatTTC"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="myCommerceApp.stock.datePaiement" for="field_datePaiement">Date Paiement</label>
+          <div class="input-group">
+            <input
+              id="field_datePaiement"
+              data-cy="datePaiement"
+              type="text"
+              class="form-control"
+              name="datePaiement"
+              ngbDatepicker
+              #datePaiementDp="ngbDatepicker"
+              formControlName="datePaiement"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="datePaiementDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<div>
+  <h2 id="page-heading" data-cy="StockHeading">
+    <span jhiTranslate="myCommerceApp.stock.home.title">Stocks</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="myCommerceApp.stock.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-stock"
+        [routerLink]="['/stock/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="myCommerceApp.stock.home.createLabel"> Create a new Stock </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="stocks?.length === 0">
+    <span jhiTranslate="myCommerceApp.stock.home.notFound">No stocks found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="stocks && stocks.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="myCommerceApp.stock.dateEntree">Date Entree</span></th>
+          <th scope="col"><span jhiTranslate="myCommerceApp.stock.fournisseur">Fournisseur</span></th>
+          <th scope="col"><span jhiTranslate="myCommerceApp.stock.libelle">Libelle</span></th>
+          <th scope="col"><span jhiTranslate="myCommerceApp.stock.quantite">Quantite</span></th>
+          <th scope="col"><span jhiTranslate="myCommerceApp.stock.montantAchatTTC">Montant Achat TTC</span></th>
+          <th scope="col"><span jhiTranslate="myCommerceApp.stock.datePaiement">Date Paiement</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stock of stocks; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/stock', stock.id, 'view']">{{ stock.id }}</a>
+          </td>
+          <td>{{ stock.dateEntree | formatMediumDate }}</td>
+          <td>{{ stock.fournisseur }}</td>
+          <td>{{ stock.libelle }}</td>
+          <td>{{ stock.quantite }}</td>
+          <td>{{ stock.montantAchatTTC }}</td>
+          <td>{{ stock.datePaiement | formatMediumDate }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/stock', stock.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/stock', stock.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(stock)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

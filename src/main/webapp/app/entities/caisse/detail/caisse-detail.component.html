@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="caisse">
+      <h2 data-cy="caisseDetailsHeading"><span jhiTranslate="myCommerceApp.caisse.detail.title">Caisse</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ caisse.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="myCommerceApp.caisse.argentRetraite">Argent Retraite</span></dt>
+        <dd>
+          <span>{{ caisse.argentRetraite }}</span>
+        </dd>
+        <dt><span jhiTranslate="myCommerceApp.caisse.argentDepose">Argent Depose</span></dt>
+        <dd>
+          <span>{{ caisse.argentDepose }}</span>
+        </dd>
+        <dt><span jhiTranslate="myCommerceApp.caisse.caisseAttendu">Caisse Attendu</span></dt>
+        <dd>
+          <span>{{ caisse.caisseAttendu }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/caisse', caisse.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

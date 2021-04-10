@@ -1,0 +1,74 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-caisse-heading" data-cy="CaisseCreateUpdateHeading" jhiTranslate="myCommerceApp.caisse.home.createOrEditLabel">
+        Create or edit a Caisse
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="myCommerceApp.caisse.argentRetraite" for="field_argentRetraite"
+            >Argent Retraite</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="argentRetraite"
+            id="field_argentRetraite"
+            data-cy="argentRetraite"
+            formControlName="argentRetraite"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="myCommerceApp.caisse.argentDepose" for="field_argentDepose">Argent Depose</label>
+          <input
+            type="number"
+            class="form-control"
+            name="argentDepose"
+            id="field_argentDepose"
+            data-cy="argentDepose"
+            formControlName="argentDepose"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="myCommerceApp.caisse.caisseAttendu" for="field_caisseAttendu"
+            >Caisse Attendu</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="caisseAttendu"
+            id="field_caisseAttendu"
+            data-cy="caisseAttendu"
+            formControlName="caisseAttendu"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

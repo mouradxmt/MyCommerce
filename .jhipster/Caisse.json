@@ -1,0 +1,28 @@
+{
+  "name": "Caisse",
+  "fields": [
+    {
+      "fieldName": "argentRetraite",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "argentDepose",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "caisseAttendu",
+      "fieldType": "Double"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "caisse",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["MyCommerce"],
+  "changelogDate": "20210410215435"
+}

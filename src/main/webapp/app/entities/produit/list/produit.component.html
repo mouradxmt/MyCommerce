@@ -1,0 +1,92 @@
+<div>
+  <h2 id="page-heading" data-cy="ProduitHeading">
+    <span jhiTranslate="myCommerceApp.produit.home.title">Produits</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="myCommerceApp.produit.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-produit"
+        [routerLink]="['/produit/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="myCommerceApp.produit.home.createLabel"> Create a new Produit </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="produits?.length === 0">
+    <span jhiTranslate="myCommerceApp.produit.home.notFound">No produits found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="produits && produits.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="myCommerceApp.produit.libelle">Libelle</span></th>
+          <th scope="col"><span jhiTranslate="myCommerceApp.produit.categorie">Categorie</span></th>
+          <th scope="col"><span jhiTranslate="myCommerceApp.produit.prixVente">Prix Vente</span></th>
+          <th scope="col"><span jhiTranslate="myCommerceApp.produit.prixAchat">Prix Achat</span></th>
+          <th scope="col"><span jhiTranslate="myCommerceApp.produit.tVA">T VA</span></th>
+          <th scope="col"><span jhiTranslate="myCommerceApp.produit.vente">Vente</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produit of produits; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/produit', produit.id, 'view']">{{ produit.id }}</a>
+          </td>
+          <td>{{ produit.libelle }}</td>
+          <td>{{ produit.categorie }}</td>
+          <td>{{ produit.prixVente }}</td>
+          <td>{{ produit.prixAchat }}</td>
+          <td>{{ produit.tVA }}</td>
+          <td>
+            <div *ngIf="produit.vente">
+              <a [routerLink]="['/vente', produit.vente?.id, 'view']">{{ produit.vente?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/produit', produit.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/produit', produit.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(produit)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
