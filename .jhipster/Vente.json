@@ -1,0 +1,45 @@
+{
+  "name": "Vente",
+  "fields": [
+    {
+      "fieldName": "dateVente",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "nomRevendeur",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "modePaiement",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "montantVente",
+      "fieldType": "Double"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "client",
+      "otherEntityRelationshipName": "vente",
+      "relationshipName": "client"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "produit",
+      "otherEntityRelationshipName": "vente",
+      "relationshipName": "produit"
+    }
+  ],
+  "entityTableName": "vente",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["MyCommerce"],
+  "changelogDate": "20210410215439"
+}

@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-produit-heading" data-cy="ProduitCreateUpdateHeading" jhiTranslate="myCommerceApp.produit.home.createOrEditLabel">
+        Create or edit a Produit
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="myCommerceApp.produit.libelle" for="field_libelle">Libelle</label>
+          <input type="text" class="form-control" name="libelle" id="field_libelle" data-cy="libelle" formControlName="libelle" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="myCommerceApp.produit.categorie" for="field_categorie">Categorie</label>
+          <input type="text" class="form-control" name="categorie" id="field_categorie" data-cy="categorie" formControlName="categorie" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="myCommerceApp.produit.prixVente" for="field_prixVente">Prix Vente</label>
+          <input type="number" class="form-control" name="prixVente" id="field_prixVente" data-cy="prixVente" formControlName="prixVente" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="myCommerceApp.produit.prixAchat" for="field_prixAchat">Prix Achat</label>
+          <input type="number" class="form-control" name="prixAchat" id="field_prixAchat" data-cy="prixAchat" formControlName="prixAchat" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="myCommerceApp.produit.tVA" for="field_tVA">T VA</label>
+          <input type="number" class="form-control" name="tVA" id="field_tVA" data-cy="tVA" formControlName="tVA" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="myCommerceApp.produit.vente" for="field_vente">Vente</label>
+          <select class="form-control" id="field_vente" data-cy="vente" name="vente" formControlName="vente">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="venteOption.id === editForm.get('vente')!.value?.id ? editForm.get('vente')!.value : venteOption"
+              *ngFor="let venteOption of ventesSharedCollection; trackBy: trackVenteById"
+            >
+              {{ venteOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
